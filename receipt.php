@@ -1,14 +1,14 @@
 <?php
 
-// Start session to ensure session variables can be accessed
-session_start();
+// // Start session to ensure session variables can be accessed
+// session_start();
 
-// Check if the user has a valid session or order access
-if (!isset($_SESSION['user_id']) && !isset($_GET['order_id'])) {
-    // Redirect to a login page or display an error message
-    header("Location: index.php"); // Change to your login page
-    exit(); // Stop executing the rest of the script
-}
+// // Check if the user has a valid session or order access
+// if (!isset($_SESSION['form_submitted']) || $_SESSION['form_submitted'] !== true) {
+//     // Redirect to the home page or display an error
+//     header('Location: index.php'); // Change to your main page
+//     exit();
+// }
 
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
@@ -92,16 +92,16 @@ if (isset($_GET['order_id'])) {
                 Your order is successfully accepted and will be shipped in 3-4 days.
             </p>
             <br />
-            <div class="order-box">
-                <div id="contact_Method">
+            <div class="contact-info">
+                <div class="order-box-30">
                     <p class="sub-text">Contact Method</p>
                     <p class="main-text"><?= htmlspecialchars($row['contact_method']) ?></p>
                 </div>
-                <div id="order-box">
+                <div class="order-box-30">
                     <p class="sub-text">Phone</p>
                     <p class="main-text"><?= htmlspecialchars($row['phone']) ?></p>
                 </div>
-                <div id="order-box">
+                <div class="order-box-30">
                     <p class="sub-text">Email</p>
                     <p class="main-text"><?= htmlspecialchars($row['email']) ?></p>
                 </div>
@@ -109,20 +109,20 @@ if (isset($_GET['order_id'])) {
 
             <div id="line"></div>
             <div class="payment-info">
-                <div id="order-box">
+                <div class="order-box-30">
                     <p class="sub-text">Order Date</p>
                     <p class="main-text"><?= htmlspecialchars($row['order_time']) ?></p>
                 </div>
-                <div id="order-box">
+                <div class="order-box-30">
                     <p class="sub-text">Order ID</p>
                     <p class="main-text"><?= htmlspecialchars($row['order_id']) ?></p>
                 </div>
-                <div id="order-box">
+                <div class="order-box-40">
                     <p class="sub-text">Address</p>
                     <p class="main-text">
-                        <?= htmlspecialchars($row['street_address']) ?><br>
-                        <?= htmlspecialchars($row['suburb']) ?><br>
-                        <?= htmlspecialchars($row['state']) ?><br>
+                        <?= htmlspecialchars($row['street_address']) ?>
+                        <?= htmlspecialchars($row['suburb']) ?>
+                        <?= htmlspecialchars($row['state']) ?>
                         <?= htmlspecialchars($row['postcode']) ?>
                     </p>
                 </div>
@@ -187,7 +187,9 @@ if (isset($_GET['order_id'])) {
             </div>
         <?php endif; ?>
     </div>
-    <button id="print-btn" class="print-btn">🖨️ Print Receipt</button>
+    <div class="print">
+        <button id="print-btn" class="print-btn">🖨️ Print Receipt</button>
+    </div>
     <?php include "includes/footer.inc"; ?>
     <?php $conn->close(); ?>
 </body>
