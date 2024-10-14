@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  cursor: default;
+  font-family: "Roboto";
+}
+
+.input-text,
+.input-select,
+.input-comment,
+.input-checkbox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+form {
+  width: 85%;
+  margin: 0 auto;
+  margin-bottom: 64px;
+}
+
+label,
+input,
+select {
+  margin: 8px 0;
+}
+
+.input-text #fname,
+.input-text #lname {
+  width: 100%;
+}
+
+.half-half-form {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.title-text {
+  margin: 24px 0;
+}
+
+input {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #7c7c7c;
+}
+
+select {
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #7c7c7c;
+  background-color: transparent;
+}
+
+.input-text #phone {
+  width: 48%;
+}
+
+#contact {
+  margin: 0 16px 16px 16px;
+}
+
+.input-checkbox {
+  margin-top: 8px;
+}
+.button {
+  display: flex;
+  justify-content: right;
+  width: 100%;
+  margin: 16px 0;
+}
+
+#submit-button {
+  background-color: #000;
+  color: #fff;
+  width: 8%;
+  height: 48px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#comments {
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #7c7c7c;
+}
+
+#statePostcodeMessage {
+  margin-bottom: 8px;
+}
+
+/* Back to Top Button Styling */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  z-index: 1000; /* Ensure it's above other elements */
+}
+
+.back-to-top-btn:hover {
+  background-color: #e6e6e6;
+}
+
+/* Show the button when necessary */
+.back-to-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Hide the button when scrolling up */
+.back-to-top-btn.hide {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px); /* Slight slide effect */
+}
+

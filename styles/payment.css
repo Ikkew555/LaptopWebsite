@@ -1,0 +1,252 @@
+/* Container for both sections */
+#combined-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch; /* Ensures both sections have the same height */
+  background-color: #f3f3f3; /* Light grey background */
+  border-radius: 12px;
+  padding: 20px;
+  margin: 0 auto;
+  width: 85%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Ensure both sections have the same height */
+#display-info {
+  flex: 2; /* Make both sections take equal width */
+  margin: 0 10px; /* Small gap between the sections */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for both sections */
+  display: flex;
+  flex-direction: column; /* Ensure content inside can stretch vertically */
+  justify-content: space-between; /* Make the content spread evenly within */
+}
+
+.display-payment {
+  flex: 1; /* Make both sections take equal width */
+  margin: 0 10px; /* Small gap between the sections */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for both sections */
+  display: flex;
+  flex-direction: column; /* Ensure content inside can stretch vertically */
+  justify-content: space-between; /* Make the content spread evenly within */
+}
+
+/* Payment title styling */
+#payment-title {
+  width: 85%;
+  padding: 48px 0;
+  text-align: left;
+  font-size: 32px;
+  margin: 0 auto;
+}
+
+/* Form layout */
+.display-payment form {
+  display: flex;
+  flex-direction: column;
+}
+
+.display-payment fieldset {
+  border-radius: 8px;
+  padding: 24px;
+  background-color: #f9f9f9; /* Light grey form background */
+  border: none;
+}
+
+.display-payment input,
+.display-payment select {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #f9f9f9;
+  width: 100%;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.display-payment h2 {
+  font-size: 1.5rem;
+  margin-bottom: 32px;
+  text-align: center;
+  color: #333;
+}
+
+/* Button styling */
+.btn-submit {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #45a049;
+}
+
+.btn-cancel {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background-color: #d32f2f;
+}
+
+/* Error messages styling */
+#error-messages {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Flexbox layout for card type, number, expiry, and CVV */
+.card-type,
+.card-number,
+.card-expiry,
+.card-cvv {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 32px 0;
+  text-align: right;
+}
+
+.topic {
+  color: #b3b3b3;
+}
+
+#display-container {
+  margin-bottom: 32px;
+}
+
+#cardTypeAlert,
+#nameOnCardAlert,
+#cardNumberAlert,
+#cardExpiryAlert,
+#cvvAlert {
+  margin-bottom: 8px;
+}
+
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -30px; /* Center the spinner */
+  margin-top: -30px;
+  z-index: 9999;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Modal Styles */
+#popup-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: none; /* Hidden by default */
+  z-index: 1000; /* Ensure it's on top */
+  text-align: center;
+  padding: 20px;
+}
+
+/* Car Animation */
+@keyframes carMove {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.car-animation {
+  width: 100px;
+  position: relative;
+  top: 40px;
+}
+
+.car {
+  width: 100%;
+  animation: carMove 2s infinite linear;
+}
+
+/* Mail Animation */
+@keyframes mailFly {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-50px) rotate(-10deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.mail {
+  width: 80px;
+  animation: mailFly 1.5s infinite ease-in-out;
+}
+
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none; /* Hidden by default */
+  z-index: 999;
+}
+
+/* Hide and show animations */
+.modal-show {
+  display: block;
+}
+
+.modal-hide {
+  display: none;
+}
+
+
+#timer {
+  margin: 32px 0;
+  text-align: center;
+}

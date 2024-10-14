@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  margin: 0;
+  font-family: "Roboto";
+  box-sizing: border-box;
+  cursor: default;
+  color: #fff;
+}
+
+body {
+  background-color: #000;
+}
+
+.about-us {
+  margin: 4% auto;
+  width: 85%;
+  /* background-color: aqua; */
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  object-fit: cover;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#aboutUsTopImage {
+  width: 48%;
+  border: 2px solid #fff; /* Adjust the border thickness and color */
+}
+
+.content-box {
+  /* background-color: #fff; */
+  width: 50%;
+  height: 100%;
+  text-align: left;
+}
+
+#content-box-subtitle {
+  font-size: 14px;
+  color: grey;
+  margin-bottom: 16px;
+}
+
+#about-us-title {
+  text-align: center;
+  font-size: 48px;
+  color: white;
+  font-weight: normal;
+  margin-top: 4%;
+}
+
+dd {
+  margin: 0;
+  grid-column-start: 2;
+  margin-bottom: 32px;
+  font-size: 16px;
+}
+
+dt {
+  color: #fff;
+  font-size: 16px;
+}
+
+dl {
+  display: grid;
+  grid-gap: 4px 16px;
+  grid-template-columns: max-content;
+}
+
+.footer-copyright {
+  justify-content: space-between;
+  width: 100%;
+}
+
+dd a:hover {
+  cursor: pointer;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 85%;
+  margin: 0 auto;
+  margin-bottom: 64px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+#timetable {
+  width: 85%;
+  margin: 16px auto;
+}
+
+@media screen and (max-width:425px) {
+
+  .content-box {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .about-us {
+    flex-direction: column;
+  }
+
+  #aboutUsTopImage {
+    width: 100%;
+  }
+
+}
