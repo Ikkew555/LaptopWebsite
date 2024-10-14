@@ -129,5 +129,30 @@
   width: 100%;
 }
 
+.order-box-30 {
+  width: 30%;
+}
+
+.order-box-40 {
+  width: 40%;
+}
+
+.print-btn {
+  border: none;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+  padding: 16px 24px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.print {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
 @media screen and (max-width: 425px) {
 }

@@ -1,12 +1,12 @@
 <?php
-session_start(); // Start the session
+// session_start(); // Start the session
 
-// Check if form was submitted or if a valid session variable exists
-if (!isset($_SESSION['form_submitted']) || $_SESSION['form_submitted'] !== true) {
-    // Redirect to the home page or display an error
-    header('Location: index.php'); // Change to your main page
-    exit();
-}
+// // Check if form was submitted or if a valid session variable exists
+// if (!isset($_SESSION['form_submitted']) || $_SESSION['form_submitted'] !== true) {
+//     // Redirect to the home page or display an error
+//     header('Location: index.php'); // Change to your main page
+//     exit();
+// }
 
 include 'settings.php';
 
@@ -115,8 +115,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Credit card expiry validation
-    if (!preg_match("/^\d{2}-\d{2}$/", $card_expiry) || !validateExpiry($card_expiry)) {
-        $errors[] = "VCC must be in the format of MM-YY and valid.";
+    if (!preg_match("/^\d{2}\/\d{2}$/", $card_expiry) || !validateExpiry($card_expiry)) {
+        $errors[] = "Expiry date must be in the format of MM/YY and valid.";
     }
 
     // CVV validation
@@ -142,10 +142,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $order_cost = $quantity * $price;
 
     // Insert data into the orders table
-    $stmt = $conn->prepare("INSERT INTO orders (first_name, last_name, email, street_address, suburb, state, postcode, phone, contact_method, product, price_ea, quantity, features, comments, order_cost, order_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'PENDING')");
+    $stmt = $conn->prepare("INSERT INTO orders (first_name, last_name, email, street_address, suburb, state, postcode, phone, contact_method, product, price_ea, quantity, features, comments, order_cost, card_type, name_on_card, vcc, cvv, card_number, order_time, order_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'PENDING')");
 
     // Bind parameters
-    $stmt->bind_param("ssssssssssiissd", $fname, $lname, $email, $street, $suburb, $state, $postcode, $phone, $contactMethod, $product, $price, $quantity, $features, $comments, $order_cost);
+    $stmt->bind_param("ssssssssssiissdsssss", $fname, $lname, $email, $street, $suburb, $state, $postcode, $phone, $contactMethod, $product, $price, $quantity, $features, $comments, $order_cost, $card_type, $card_name, $card_expiry, $card_cvv, $card_number);
 
     if ($stmt->execute()) {
         // Get the last inserted order ID
@@ -167,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Function to validate the expiry date
 function validateExpiry($expiry)
 {
-    $parts = explode('-', $expiry);
+    $parts = explode('/', $expiry);
     $month = (int)$parts[0];
     $year = (int)$parts[1];
 
@@ -194,5 +194,5 @@ function validateCardNumber($cardType, $cardNumber)
     return false; // Invalid card type
 }
 
-// Unset the session variable to prevent direct access after processing
-unset($_SESSION['form_submitted']);
+// // Unset the session variable to prevent direct access after processing
+// unset($_SESSION['form_submitted']);
