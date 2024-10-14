@@ -1,4 +1,13 @@
 <?php
+session_start(); // Start the session
+
+// Check if form was submitted or if a valid session variable exists
+if (!isset($_SESSION['form_submitted']) || $_SESSION['form_submitted'] !== true) {
+    // Redirect to the home page or display an error
+    header('Location: index.php'); // Change to your main page
+    exit();
+}
+
 include 'settings.php';
 
 // Custom function to sanitize input
@@ -184,3 +193,6 @@ function validateCardNumber($cardType, $cardNumber)
     }
     return false; // Invalid card type
 }
+
+// Unset the session variable to prevent direct access after processing
+unset($_SESSION['form_submitted']);
