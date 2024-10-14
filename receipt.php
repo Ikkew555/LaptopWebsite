@@ -1,4 +1,15 @@
 <?php
+
+// Start session to ensure session variables can be accessed
+session_start();
+
+// Check if the user has a valid session or order access
+if (!isset($_SESSION['user_id']) && !isset($_GET['order_id'])) {
+    // Redirect to a login page or display an error message
+    header("Location: index.php"); // Change to your login page
+    exit(); // Stop executing the rest of the script
+}
+
 // Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -60,7 +71,7 @@ if (isset($_GET['order_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/receipt.css" />
     <link rel="stylesheet" type="text/css" href="styles/global.css" />
-
+    <script defer src="scripts/receipt.js" type="text/javascript"></script>
     <title>Order Receipt</title>
 </head>
 
@@ -109,9 +120,9 @@ if (isset($_GET['order_id'])) {
                 <div id="order-box">
                     <p class="sub-text">Address</p>
                     <p class="main-text">
-                        <?= htmlspecialchars($row['street_address']) ?>
-                        <?= htmlspecialchars($row['suburb']) ?>
-                        <?= htmlspecialchars($row['state']) ?>
+                        <?= htmlspecialchars($row['street_address']) ?><br>
+                        <?= htmlspecialchars($row['suburb']) ?><br>
+                        <?= htmlspecialchars($row['state']) ?><br>
                         <?= htmlspecialchars($row['postcode']) ?>
                     </p>
                 </div>
@@ -157,10 +168,6 @@ if (isset($_GET['order_id'])) {
                         <p class="sub-text">Shipping Fee</p>
                         <p class="main-text">$<?= number_format($shippingFee, 2) ?></p>
                     </div>
-                    <!-- <div class="price-box">
-                        <p class="sub-text">Tax (7%)</p>
-                        <p class="main-text">$<?= number_format($tax, 2) ?></p>
-                    </div> -->
                     <div id="line-8px"></div>
                     <div class="price-box">
                         <p class="main-text">Total</p>
@@ -180,6 +187,7 @@ if (isset($_GET['order_id'])) {
             </div>
         <?php endif; ?>
     </div>
+    <button id="print-btn" class="print-btn">🖨️ Print Receipt</button>
     <?php include "includes/footer.inc"; ?>
     <?php $conn->close(); ?>
 </body>
