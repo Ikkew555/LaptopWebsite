@@ -185,7 +185,9 @@ function onSubmitForm() {
       console.log("Saved data:", JSON.parse(localStorage.getItem("formData")));
 
       // Redirect to the payment page
-      window.location.href = "payment.php";
+      // window.location.href = "payment.php";
+
+      form.submit();
     });
   } else {
     console.error("Form element not found!");

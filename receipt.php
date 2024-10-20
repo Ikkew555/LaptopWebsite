@@ -1,20 +1,4 @@
 <?php
-
-// // Start session to ensure session variables can be accessed
-// session_start();
-
-// // Check if the user has a valid session or order access
-// if (!isset($_SESSION['form_submitted']) || $_SESSION['form_submitted'] !== true) {
-//     // Redirect to the home page or display an error
-//     header('Location: index.php'); // Change to your main page
-//     exit();
-// }
-
-// Enable error reporting for debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 // Include your settings file
 include 'settings.php';
 
@@ -44,22 +28,26 @@ if (isset($_GET['order_id'])) {
         $imageFilename = 'default.png';  // Default image
 
         switch (trim($row['product'])) {
-            case 'HP Victus 15.6" Full HD 144Hz Gaming Laptop (13th Gen Intel i7)[GeForce RTX 4060]':
+            case 'HP Victus 15.6-inch Full HD 144Hz Gaming Laptop (13th Gen Intel i7)[GeForce RTX 4060]':
                 $imageFilename = 'HPVictus.png';
                 break;
-            case 'MSI Raider GE68HX 16" QHD+ 240Hz Gaming Laptop (13th Gen Intel i7)[GeForce RTX 4070]':
+            case 'MSI Raider GE68HX 16-inch QHD+ 240Hz Gaming Laptop (13th Gen Intel i7)[GeForce RTX 4070]':
                 $imageFilename = 'MSIRaider.png';
                 break;
             case 'Apple MacBook Air 15-inch with M3 chip, 10-core GPU 256GB/8GB (Midnight) [2024]':
                 $imageFilename = 'MacBookAir15inch.png';
                 break;
-            case 'Microsoft Surface Pro (11th Edition) Copilot+ PC 13" Snapdragon X Plus/16GB/256GB':
+            case 'Microsoft Surface Pro (11th Edition) Copilot+ PC 13-inch Snapdragon X Plus/16GB/256GB':
                 $imageFilename = 'MicrosoftSurfacePro.png';
                 break;
         }
     }
 
     $stmt->close();
+} else {
+    echo "Invalid request.";
+    header("location:index.php");
+    exit;
 }
 ?>
 

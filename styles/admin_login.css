@@ -1,0 +1,45 @@
+body {
+  background-color: black;
+}
+
+.login-form {
+  margin: 0 auto;
+  background-color: white;
+  width: 30%;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+input {
+  width: 100%;
+  border-radius: 8px;
+  border: solid 1px grey;
+  margin-top: 16px;
+  padding: 16px;
+}
+
+label {
+  margin-bottom: 16px;
+}
+
+img {
+  width: 20%;
+  margin: 0 auto;
+  display: block;
+}
+
+form {
+  margin-top: 24px;
+}
+
+button {
+  width: 100%;
+  color: white;
+  border-radius: 8px;
+  background-color: black;
+  padding: 16px;
+}
+
+button:hover {
+  cursor: pointer;
+}
