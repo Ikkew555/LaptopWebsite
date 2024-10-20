@@ -1,13 +1,13 @@
 <?php
 include 'settings.php';
 
-if (isset($_GET['id']) && isset($_GET['status'])) {
-    $orderID = $_GET['id'];
-    $newStatus = $_GET['status'];  // Get the new status from the URL
+if (isset($_POST['order_id']) && isset($_POST['order_status'])) {
+    $orderID = $_POST['order_id'];  // Get order ID from POST
+    $newStatus = $_POST['order_status'];  // Get new status from POST
 
     // Prepare the UPDATE statement
     $stmt = $conn->prepare("UPDATE orders SET order_status = ? WHERE order_id = ?");
-    $stmt->bind_param("si", $newStatus, $orderID); // Assuming order_id is an integer
+    $stmt->bind_param("si", $newStatus, $orderID);  // Assuming order_id is an integer
 
     if ($stmt->execute()) {
         echo "Order status updated to " . htmlspecialchars($newStatus) . " successfully.";

@@ -1,10 +1,8 @@
 <?php
 // session_start(); // Start the session
 
-// // Check if form was submitted or if a valid session variable exists
 // if (!isset($_SESSION['form_submitted']) || $_SESSION['form_submitted'] !== true) {
-//     // Redirect to the home page or display an error
-//     header('Location: index.php'); // Change to your main page
+//     header('Location: index.php');
 //     exit();
 // }
 
@@ -13,11 +11,8 @@ include 'settings.php';
 // Custom function to sanitize input
 function sanitiseInput($data)
 {
-    // Trim leading and trailing spaces
     $data = trim($data);
-    // Remove backslashes
     $data = stripslashes($data);
-    // Convert special HTML characters to HTML entities
     $data = htmlspecialchars($data);
     return $data;
 }
@@ -162,6 +157,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 } else {
     echo "Invalid request.";
+    header("location:index.php");
+    exit;
 }
 
 // Function to validate the expiry date
@@ -194,5 +191,4 @@ function validateCardNumber($cardType, $cardNumber)
     return false; // Invalid card type
 }
 
-// // Unset the session variable to prevent direct access after processing
 // unset($_SESSION['form_submitted']);

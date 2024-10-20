@@ -1,3 +1,147 @@
+<?php
+function sanitiseInput($data)
+{
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+  // Sanitise and validate inputs
+  $fname = isset($_POST['fname']) ? sanitiseInput($_POST['fname']) : "";
+  $lname = isset($_POST['lname']) ? sanitiseInput($_POST['lname']) : "";
+  $email = isset($_POST['email']) ? filter_var(sanitiseInput($_POST['email']), FILTER_VALIDATE_EMAIL) : "";
+  $street = isset($_POST['street']) ? sanitiseInput($_POST['street']) : "";
+  $suburb = isset($_POST['suburb']) ? sanitiseInput($_POST['suburb']) : "";
+  $state = isset($_POST['state']) ? sanitiseInput($_POST['state']) : "";
+  $postcode = isset($_POST['postcode']) ? sanitiseInput($_POST['postcode']) : "";
+  $phone = isset($_POST['phone']) ? sanitiseInput($_POST['phone']) : "";
+  $contactMethod = isset($_POST['contact']) ? sanitiseInput($_POST['contact']) : "";
+  $product = isset($_POST['product']) ? sanitiseInput($_POST['product']) : "";
+  $quantity = isset($_POST['quantity']) ? filter_var(sanitiseInput($_POST['quantity']), FILTER_VALIDATE_INT) : 0;
+  $features = isset($_POST['features']) ? implode(", ", $_POST['features']) : "";
+  $comments = isset($_POST['comments']) ? sanitiseInput($_POST['comments']) : "";
+
+  // Validate required fields
+  $errors = [];
+
+  // First name validation
+  if (strlen($fname) > 25 || empty($fname) || !preg_match("/^[a-zA-Z]*$/", $fname)) {
+    $errors[] = "First name must be a maximum of 25 characters and contain only alphabetical characters.";
+  }
+
+  // Last name validation
+  if (strlen($lname) > 25 || empty($lname) || !preg_match("/^[a-zA-Z]*$/", $lname)) {
+    $errors[] = "Last name must be a maximum of 25 characters and contain only alphabetical characters.";
+  }
+
+  // Email validation
+  if (!$email) {
+    $errors[] = "Invalid email address.";
+  }
+
+  // Street address validation
+  if (strlen($street) > 40) {
+    $errors[] = "Street address must be a maximum of 40 characters.";
+  }
+
+  // Suburb validation
+  if (strlen($suburb) > 20 || !preg_match("/^[a-zA-Z0-9 ]*$/", $suburb)) {
+    $errors[] = "Suburb must be a maximum of 20 characters and can include letters, numbers, and spaces.";
+  }
+
+  // State validation
+  $validStates = ['VIC', 'NSW', 'QLD', 'NT', 'WA', 'SA', 'TAS', 'ACT'];
+  if (!in_array($state, $validStates)) {
+    $errors[] = "Please select a valid state.";
+  }
+
+  // Postcode validation
+  if (strlen($postcode) !== 4 || !ctype_digit($postcode)) {
+    $errors[] = "Postcode must be exactly 4 digits.";
+  }
+
+  // Phone number validation
+  if (!is_numeric($phone) || strlen($phone) != 10) {
+    $errors[] = "Phone number must be exactly 10 digits.";
+  }
+
+  // Preferred contact method validation
+  if (!in_array($contactMethod, ['email', 'post', 'phone'])) {
+    $errors[] = "Please select a valid preferred contact method.";
+  }
+
+  // Product quantity validation
+  if (empty($quantity) || $quantity <= 0) {
+    $errors[] = "Quantity must be a positive integer.";
+  }
+
+  if (empty($features)) {
+    $errors[] = "Please select at least one feature.";
+  }
+
+  // Validate state and postcode match
+  if ($state && $postcode) {
+    $firstDigit = $postcode[0]; // Get the first digit of the postcode
+    switch ($state) {
+      case "VIC":
+        if ($firstDigit !== "3" && $firstDigit !== "8") {
+          $errors[] = "Postcode does not match the selected state (VIC).";
+        }
+        break;
+      case "NSW":
+        if ($firstDigit !== "1" && $firstDigit !== "2") {
+          $errors[] = "Postcode does not match the selected state (NSW).";
+        }
+        break;
+      case "QLD":
+        if ($firstDigit !== "4" && $firstDigit !== "9") {
+          $errors[] = "Postcode does not match the selected state (QLD).";
+        }
+        break;
+      case "NT":
+        if ($firstDigit !== "0") {
+          $errors[] = "Postcode does not match the selected state (NT).";
+        }
+        break;
+      case "WA":
+        if ($firstDigit !== "6") {
+          $errors[] = "Postcode does not match the selected state (WA).";
+        }
+        break;
+      case "SA":
+        if ($firstDigit !== "5") {
+          $errors[] = "Postcode does not match the selected state (SA).";
+        }
+        break;
+      case "TAS":
+        if ($firstDigit !== "7") {
+          $errors[] = "Postcode does not match the selected state (TAS).";
+        }
+        break;
+      case "ACT":
+        if ($firstDigit !== "0") {
+          $errors[] = "Postcode does not match the selected state (ACT).";
+        }
+        break;
+      default:
+        $errors[] = "Invalid state provided.";
+    }
+  }
+
+  // Display errors if any
+  if (!empty($errors)) {
+    foreach ($errors as $error) {
+      echo "<p style='color: red;'>$error</p>";
+    }
+    echo "<p><a href='javascript:history.back()'>Go Back and Correct the Form</a></p>";
+    exit;
+  }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

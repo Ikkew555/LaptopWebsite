@@ -15,7 +15,7 @@
 
 <body>
   <?php include 'includes/header.inc'; ?>
-  <form id="enquiry-form" novalidate="novalidate">
+  <form id="enquiry-form" method="POST" action="payment.php" novalidate="novalidate">
     <section>
       <h1 class="title-text">Personal information</h1>
       <div class="half-half-form">
@@ -151,15 +151,15 @@
             (Midnight) [2024]
           </option>
           <option value="1999">
-            HP Victus 15.6" Full HD 144Hz Gaming Laptop (13th Gen Intel
+            HP Victus 15.6-inch Full HD 144Hz Gaming Laptop (13th Gen Intel
             i7)[GeForce RTX 4060]
           </option>
           <option value="3299">
-            MSI Raider GE68HX 16" QHD+ 240Hz Gaming Laptop (13th Gen Intel
+            MSI Raider GE68HX 16-inch QHD+ 240Hz Gaming Laptop (13th Gen Intel
             i7)[GeForce RTX 4070]
           </option>
           <option value="1899">
-            Microsoft Surface Pro (11th Edition) Copilot+ PC 13" Snapdragon X
+            Microsoft Surface Pro (11th Edition) Copilot+ PC 13-inch Snapdragon X
             Plus/16GB/256GB
           </option>
         </select>
